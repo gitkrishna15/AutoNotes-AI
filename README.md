@@ -33,7 +33,7 @@ The project demonstrates how multiple AI components can be orchestrated into a p
 # System Architecture
 AutoNotes-AI follows a modular processing pipeline:
 
-
+```
 Audio Input
    ↓
 Speech-to-Text Transcription
@@ -47,7 +47,7 @@ LLM-Based Knowledge Generation
 Structured Notes Output
    ↓
 Per-Type Aggregation
-
+```
 Each stage is independently testable and modular.
 
 
