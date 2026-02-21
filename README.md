@@ -54,30 +54,30 @@ Each stage is independently testable and modular.
 # Installation
 
 1. Clone the repository
-
+```
 git clone https://github.com/gitkrishna15/AutoNotes-AI.git
 cd AutoNotes-AI
-
+```
 2. Create a virtual environment
-
+```
 python3 -m venv venv
 source venv/bin/activate
-
+```
 3. Install dependencies
-
+```
 pip install -r requirements.txt
-
+```
 4. Install Ollama
 Download from:https://ollama.com
 Then pull Llama3:
-
+```
 ollama pull llama3
-
+```
 # Basic Usage
 Record and generate general notes (default)
-
+```
 python realtime_listener.py --mode record
-
+```
 If no note type is specified, general study notes are generated.
 
 # Note Type Control
@@ -88,13 +88,13 @@ Supported note types:
 	•	exams (ranked exam preparation)
 
 # Generate interview and certification notes
-
+```
 python realtime_listener.py --mode record --enablenotes int,cert
-
+```
 # Generate hard-level exam preparation
-
+```
 python realtime_listener.py --mode record --enablenotes exams --level hard
-
+```
 If exams is enabled, a difficulty level must be specified:
 	•	easy
 	•	medium
@@ -103,9 +103,9 @@ If exams is enabled, a difficulty level must be specified:
 # Aggregate Mode
 Aggregate mode combines multiple session transcripts into consolidated knowledge files.
 Example:
-
+```
 python realtime_listener.py --mode aggregate --enablenotes general,int
-
+```
 This generates cumulative files per enabled note type.
 
 # Confidence Scoring
