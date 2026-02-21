@@ -1,0 +1,14 @@
+venv/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+*.wav
+audio/
+transcripts/
+classification_logs/
+notes/
+aggregate_notes/
+processed_sessions.txt
+.env
+.DS_Store
