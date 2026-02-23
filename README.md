@@ -78,6 +78,121 @@ Then pull Llama3:
 ```
 ollama pull llama3
 ```
+
+# Audio Setup Guide
+You can run AutoNotes-AI in three modes:
+```
+A) Mic only 
+B) System audio only 
+C) Mic + system audio (recommended for Zoom / YouTube / meetings)
+```
+
+# macOS Setup
+Scenario A — Mic Only (No BlackHole Required)
+```
+	1	Go to System Settings → Privacy & Security → Microphone
+	2	Allow Terminal / VS Code
+	3	In script, set device to MacBook microphone
+	4	Use:
+```
+```
+SAMPLE_RATE = 16000
+CHANNELS = 1
+```
+This is the simplest setup.
+
+# Scenario C — Mic + System Audio (Zoom, YouTube, etc.)
+macOS does not natively allow capturing system audio. You must install a virtual audio driver.
+
+Step 1 — Install BlackHole
+
+Install via Homebrew:
+```
+brew install blackhole-2ch
+```
+Restart your machine after installation.
+
+Step 2 — Create Aggregate Device
+
+Open Audio MIDI Setup.
+```
+Click "+" → Create Aggregate Device.
+Select:
+	•	BlackHole 2ch
+	•	MacBook Pro Microphone
+Set:
+	•	Sample rate: 48000 Hz
+	•	Clock source: Microphone
+Rename it to:
+
+Mic+System
+```
+
+Step 3 — Create Multi-Output Device
+```
+Click "+" → Create Multi-Output Device.
+Select:
+	•	BlackHole 2ch
+	•	MacBook Speakers
+```
+Set sample rate to 48000 Hz.
+
+Step 4 — Set System Output
+```
+System Settings → Sound → Output Select:
+
+Multi-Output Device
+
+Now system audio flows to:
+	•	Speakers
+	•	BlackHole
+And microphone flows through Aggregate Device.
+```
+Step 5 — Configure Python Script
+Find device index:
+```
+
+import sounddevice as sd
+print(sd.query_devices())
+```
+Select the index for:
+```
+Mic+System
+```
+Use:
+
+```
+SAMPLE_RATE = 48000
+CHANNELS = 2
+```
+Important: Stereo audio is automatically converted to mono internally before transcription.
+
+# Windows Setup
+Windows does NOT support BlackHole.
+But you can capture system audio using:
+
+# Option 1 — VB-Audio Virtual Cable (Recommended)
+Download:
+```
+https://vb-audio.com/Cable/
+```
+
+Install and restart.
+Then:
+```
+	1	Set Windows Output to "CABLE Input"
+	2	Set Python input device to "CABLE Output"
+	3	To capture mic + system together, use Windows "Stereo Mix" (if supported)
+```
+# Option 2 — Use Built-in Stereo Mix (If Available)
+```
+	1	Open Sound Control Panel
+	2	Enable "Stereo Mix"
+	3	Use that as input device
+```
+Note: Some modern Windows machines disable Stereo Mix. In that case, use VB-Cable.
+
+
 # Basic Usage
 Record and generate general notes (default)
 ```
@@ -170,7 +285,13 @@ It is particularly relevant for:
 Phase 1 (Current):
 	•	Stable transcription + classification + structured notes
 Phase 2 (Planned):
+	•	Standalone User Prompt to chat with LLM ( User prompt -> LLM )
+	•	Standalone User prompt to chat with LLM using Audio ( User Audio -> text -> LLM Prompt )
+	•	Process PDF/Images as input with user prompt 
 ```
+# Tests
+Currently tested only on Mac Book Pro with enable notes option for general, int , cert and individual prompt options.
+
 # License
 This project is released under the MIT License.
 
