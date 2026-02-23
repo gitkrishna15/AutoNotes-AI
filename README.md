@@ -292,6 +292,14 @@ Phase 2 (Planned):
 # Tests
 Currently tested only on Mac Book Pro with enable notes option for general, int , cert and individual prompt options.
 
+## Professional Disclaimer
+
+This project was developed independently outside of working hours and without the use of any proprietary code, confidential information, or resources from my employer.
+
+AutoNotes-AI is a personal research and learning initiative focused on AI system design and local LLM orchestration.
+
+The views, design decisions, and implementations reflected in this repository are solely my own and do not represent the views of any organization or employer.
+
 # License
 This project is released under the MIT License.
 
